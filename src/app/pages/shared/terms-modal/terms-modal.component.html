@@ -1,0 +1,223 @@
+<div
+  *ngIf="isOpen"
+  class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 px-4"
+>
+  <div class="bg-white w-full max-w-2xl rounded-2xl shadow-xl p-6 relative">
+    <!-- CLOSE -->
+    <button
+      (click)="onClose()"
+      class="absolute top-3 right-3 text-gray-400 hover:text-gray-600"
+    >
+      ✕
+    </button>
+
+    <!-- TITLE -->
+    <h2 class="text-xl font-bold text-gray-900 mb-4">
+      {{
+        type === "terms"
+          ? "Terms of Service"
+          : type === "privacy"
+            ? "Privacy Policy"
+            : "Data Protection (LGPD)"
+      }}
+    </h2>
+
+    <!-- CONTENT -->
+    <div class="max-h-[400px] overflow-y-auto text-sm text-gray-600 space-y-3">
+      <!-- TERMS -->
+      <ng-container *ngIf="type === 'terms'">
+        <p><strong>Terms of Service</strong></p>
+
+        <p>
+          By accessing and using this platform ("Service"), you agree to be
+          bound by these Terms of Service. If you do not agree, you must not use
+          the Service.
+        </p>
+
+        <p>
+          <strong>1. Service Description</strong><br />
+          The Service provides automated tools for generating backend code and
+          APIs. The generated output is provided "as is" and may require further
+          validation, testing, and adjustments by the user.
+        </p>
+
+        <p>
+          <strong>2. User Responsibility</strong><br />
+          You are solely responsible for how you use the generated code,
+          including but not limited to security, compliance, and deployment. The
+          Service does not guarantee that generated code is free from errors or
+          vulnerabilities.
+        </p>
+
+        <p>
+          <strong>3. Account and Access</strong><br />
+          You are responsible for maintaining the confidentiality of your
+          account credentials. Any activity under your account is your
+          responsibility.
+        </p>
+
+        <p>
+          <strong>4. Subscription and Payments</strong><br />
+          The Service operates on a subscription basis. Payments are processed
+          through third-party providers. Failure to complete payment may result
+          in suspension or termination of access.
+        </p>
+
+        <p>
+          <strong>5. Fair Use and Restrictions</strong><br />
+          You agree not to misuse the Service, including but not limited to
+          reverse engineering, abuse of system resources, or use for unlawful
+          purposes.
+        </p>
+
+        <p>
+          <strong>6. Intellectual Property</strong><br />
+          The Service and its underlying technology remain the property of the
+          provider. Generated code may be used by the user, but the platform
+          itself may not be copied or redistributed.
+        </p>
+
+        <p>
+          <strong>7. Limitation of Liability</strong><br />
+          To the maximum extent permitted by law, the Service is provided "as
+          is" without warranties of any kind. The provider shall not be liable
+          for any direct, indirect, incidental, or consequential damages arising
+          from the use of the Service.
+        </p>
+
+        <p>
+          <strong>8. Service Availability</strong><br />
+          The Service may be updated, modified, or discontinued at any time
+          without prior notice.
+        </p>
+
+        <p>
+          <strong>9. Termination</strong><br />
+          The provider reserves the right to suspend or terminate accounts that
+          violate these terms.
+        </p>
+
+        <p>
+          <strong>10. Governing Law</strong><br />
+          These terms are governed by the laws of Brazil.
+        </p>
+      </ng-container>
+
+      <!-- PRIVACY -->
+      <ng-container *ngIf="type === 'privacy'">
+        <p><strong>Privacy Policy</strong></p>
+
+        <p>
+          This Privacy Policy explains how your personal data is collected,
+          used, and protected when using this Service.
+        </p>
+
+        <p>
+          <strong>1. Data Collected</strong><br />
+          We may collect personal data such as name, email address, account
+          usage data, and technical information necessary to operate the
+          Service.
+        </p>
+
+        <p>
+          <strong>2. Payment Information</strong><br />
+          Payment data is processed securely by third-party providers (e.g.,
+          Stripe). We do not store full payment card details.
+        </p>
+
+        <p>
+          <strong>3. Purpose of Processing</strong><br />
+          Your data is used to provide, maintain, and improve the Service, as
+          well as to manage subscriptions and user access.
+        </p>
+
+        <p>
+          <strong>4. Data Sharing</strong><br />
+          We do not sell personal data. Data may be shared with service
+          providers strictly necessary for operation (e.g., payment processing).
+        </p>
+
+        <p>
+          <strong>5. Data Retention</strong><br />
+          Personal data is retained only for as long as necessary to fulfill its
+          purpose or comply with legal obligations.
+        </p>
+
+        <p>
+          <strong>6. Security</strong><br />
+          We implement reasonable technical and organizational measures to
+          protect personal data against unauthorized access, loss, or misuse.
+        </p>
+
+        <p>
+          <strong>7. User Rights</strong><br />
+          You may request access, correction, or deletion of your personal data
+          at any time.
+        </p>
+
+        <p>
+          <strong>8. Changes to Policy</strong><br />
+          This policy may be updated at any time. Continued use of the Service
+          implies acceptance of changes.
+        </p>
+      </ng-container>
+
+      <!-- LGPD -->
+      <ng-container *ngIf="type === 'lgpd'">
+        <p><strong>Data Protection (LGPD Compliance)</strong></p>
+
+        <p>
+          This Service complies with the Brazilian General Data Protection Law
+          (Lei Geral de Proteção de Dados - LGPD).
+        </p>
+
+        <p>
+          <strong>1. Legal Basis</strong><br />
+          Personal data is processed based on user consent and legitimate
+          interest necessary to provide the Service.
+        </p>
+
+        <p>
+          <strong>2. Data Subject Rights</strong><br />
+          Under LGPD, you have the right to:
+          <br />- Confirm the existence of data processing <br />- Access your
+          data <br />- Correct incomplete or outdated data <br />- Request
+          anonymization or deletion <br />- Request data portability
+        </p>
+
+        <p>
+          <strong>3. Consent</strong><br />
+          By creating an account and using the Service, you explicitly consent
+          to the processing of your personal data.
+        </p>
+
+        <p>
+          <strong>4. Data Storage and Security</strong><br />
+          Data is stored securely and protected using appropriate technical
+          safeguards.
+        </p>
+
+        <p>
+          <strong>5. Data Retention</strong><br />
+          Data is retained only for as long as necessary to provide the Service
+          or comply with legal obligations.
+        </p>
+
+        <p>
+          <strong>6. Contact</strong><br />
+          For any data-related requests, you may contact support.
+        </p>
+      </ng-container>
+    </div>
+
+    <!-- ACTION -->
+    <div class="mt-6 text-right">
+      <button
+        (click)="onClose()"
+        class="bg-blue-600 text-white px-4 py-2 rounded-xl hover:bg-blue-700 transition"
+      >
+        Close
+      </button>
+    </div>
+  </div>
+</div>

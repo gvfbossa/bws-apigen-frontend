@@ -1,0 +1,58 @@
+<div class="space-y-4">
+
+  <!-- Cardholder Name -->
+  <div class="flex flex-col">
+    <label class="text-sm text-gray-600">Cardholder Name</label>
+    <input
+      type="text"
+      placeholder="Full Name"
+      class="w-full mt-1 px-4 py-2 border rounded-xl focus:ring-2 focus:ring-blue-500 outline-none"
+      #cardHolder
+      (input)="updateCardHolder($event)"
+    />
+  </div>
+
+  <!-- Card Number -->
+  <div class="flex flex-col">
+    <label class="text-sm text-gray-600">Card Number</label>
+    <div
+      #cardNumberElement
+      class="w-full mt-1 px-4 py-2 border rounded-xl bg-white focus-within:ring-2 focus-within:ring-blue-500"
+    ></div>
+    <div *ngIf="numberError" class="text-red-600 text-xs mt-1">{{ numberError }}</div>
+  </div>
+
+  <!-- Expiration & CVC -->
+  <div class="grid grid-cols-2 gap-4">
+
+    <!-- Expiry -->
+    <div class="flex flex-col">
+      <label class="text-sm text-gray-600">Expiration (MM/YY)</label>
+      <div
+        #cardExpiryElement
+        class="w-full mt-1 px-4 py-2 border rounded-xl bg-white focus-within:ring-2 focus-within:ring-blue-500"
+      ></div>
+      <div *ngIf="expiryError" class="text-red-600 text-xs mt-1">{{ expiryError }}</div>
+    </div>
+
+    <!-- CVC -->
+    <div class="flex flex-col">
+      <label class="text-sm text-gray-600">CVC</label>
+      <div
+        #cardCvcElement
+        class="w-full mt-1 px-4 py-2 border rounded-xl bg-white focus-within:ring-2 focus-within:ring-blue-500"
+      ></div>
+      <div *ngIf="cvcError" class="text-red-600 text-xs mt-1">{{ cvcError }}</div>
+    </div>
+
+  </div>
+
+  <!-- Feedback geral -->
+  <div
+    *ngIf="allFieldsComplete && !hasError"
+    class="text-green-600 text-sm flex items-center gap-1 mt-1"
+  >
+    Card is valid
+  </div>
+
+</div>
