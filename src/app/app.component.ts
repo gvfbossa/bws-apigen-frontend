@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
+import { Router, NavigationEnd, RouterOutlet } from '@angular/router';
 import { filter } from 'rxjs/operators';
+import { FooterComponent } from "./pages/shared/footer/footer.component";
+import { HeaderComponent } from "./pages/shared/header/header.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.scss',
+  imports: [RouterOutlet, FooterComponent, HeaderComponent]
 })
 export class AppComponent implements OnInit {
 
