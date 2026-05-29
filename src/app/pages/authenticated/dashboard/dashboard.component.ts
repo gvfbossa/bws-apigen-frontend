@@ -43,10 +43,6 @@ export class DashboardComponent implements OnInit {
   passwordFormatError = false
   passwordSuccess = false;
 
-  showCancelDialog = false;
-  cancelMessage = '';
-  cancelSubscriptionSuccess = false
-
   isPlanEligiblePremiumContact = false;
 
   constructor(private userService: UserService, private authService: AuthService, private router: Router) { }
@@ -60,7 +56,7 @@ export class DashboardComponent implements OnInit {
       next: (user) => {
         if (!user) {
           this.router.navigate(['/login'])
-        } else if (user.subscriptionStatus !== 'ACTIVE') {
+        } else if (user.licenseStatus !== 'ACTIVE') {
           this.router.navigate(['/login'])
         }
         this.user = user;
@@ -92,11 +88,14 @@ export class DashboardComponent implements OnInit {
         this.maxMachines = 1;
         break;
       case 'SMALL':
-        this.maxMachines = 15;
+        this.maxMachines = 5;
         break;
       case 'FULL':
-        this.maxMachines = 50;
+        this.maxMachines = 10;
         break;
+      case 'ADMIN':
+        this.maxMachines = 9999
+        break
       default:
         this.maxMachines = 0;
     }
@@ -106,28 +105,6 @@ export class DashboardComponent implements OnInit {
     this.editingPassword = false;
     this.passwordError = false;
     this.passwordSuccess = false;
-  }
-
-  cancelSubscription() {
-    this.showCancelDialog = true;
-    this.cancelMessage =
-      'Are you sure you want to cancel your subscription? Your account will remain active until the end of the current billing period.';
-  }
-
-  onConfirmCancel() {
-    console.log('Calling backend to cancel subscription...');
-    this.showCancelDialog = false;
-    this.authService.cancelSubscription()
-      .subscribe({
-        next: () => {
-          this.cancelSubscriptionSuccess = true
-        },
-        error: err => alert('Erro: ' + err.error?.message || err.message)
-      });
-  }
-
-  onCancelDialog() {
-    this.showCancelDialog = false;
   }
 
   onChangePassword() {

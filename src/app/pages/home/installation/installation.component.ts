@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-installation',
@@ -8,5 +9,7 @@ import { Component } from '@angular/core';
   styleUrl: './installation.component.scss'
 })
 export class InstallationComponent {
+
+  readonly downloadsUrl = environment.apiUrl + '/api/downloads';
 
 }

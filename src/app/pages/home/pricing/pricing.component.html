@@ -1,63 +1,63 @@
 <section class="py-28 bg-white" id="pricing">
   <div class="max-w-6xl mx-auto px-6 text-center">
-
-    <h2 class="text-4xl font-bold text-gray-900">
-      Simple, transparent pricing
-    </h2>
+    <h2 class="text-4xl font-bold text-gray-900">Simple, lifetime pricing</h2>
 
     <p class="mt-4 text-lg text-gray-600">
-      Choose the plan that fits your workflow.
+      Choose the license that fits your workflow. Pay once. Use forever.
     </p>
 
     <div class="mt-16 grid md:grid-cols-3 gap-8">
-
       <!-- SOLO -->
       <div class="border rounded-2xl p-8 text-left hover:shadow-xl transition">
         <h3 class="text-xl font-bold text-gray-900">Solo</h3>
-        <p class="mt-2 text-gray-500">Perfect for individual developers</p>
+        <p class="mt-2 text-gray-500">Perfect for solo developers</p>
 
-        <p class="text-4xl font-bold mt-6">$3.99<span class="text-lg text-gray-500">/mo</span></p>
+        <p class="text-4xl font-bold mt-6">$3.99</p>
 
         <ul class="mt-6 space-y-3 text-gray-600">
           <li>✔ 1 machine</li>
           <li>✔ Unlimited generations</li>
           <li>✔ Full CRUD generation</li>
           <li>✔ Email support</li>
-        </ul>
+        </ul>s
 
-        <button (click)="goTo('SOLO')" class="mt-8 w-full border border-gray-300 py-3 rounded-xl hover:bg-gray-100 transition">
+        <button
+          (click)="goTo('SOLO')"
+          class="mt-8 w-full border border-gray-300 py-3 rounded-xl hover:bg-gray-100 transition"
+        >
           Get started
         </button>
       </div>
 
       <!-- SMALL (DESTAQUE) -->
-      <div class="border-2 border-blue-600 rounded-2xl p-8 text-left shadow-xl relative scale-105">
-
+      <div
+        class="border-2 border-blue-600 rounded-2xl p-8 text-left shadow-xl relative scale-105"
+      >
         <!-- BADGE -->
-        <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-blue-600 text-white text-sm px-4 py-1 rounded-full">
+        <div
+          class="absolute -top-4 left-1/2 -translate-x-1/2 bg-blue-600 text-white text-sm px-4 py-1 rounded-full"
+        >
           Most popular
         </div>
 
         <h3 class="text-xl font-bold text-gray-900">Small</h3>
-        <p class="mt-2 text-gray-500">Best for freelancers & small teams</p>
+        <p class="mt-2 text-gray-500">Best for freelancers and small teams</p>
 
-        <p class="text-4xl font-bold mt-6">$6.99<span class="text-lg text-gray-500">/mo</span></p>
+        <p class="text-4xl font-bold mt-6">$6.99</p>
 
         <ul class="mt-6 space-y-3 text-gray-600">
-          <li>✔ Up to 15 machines</li>
+          <li>✔ Up to 5 machines</li>
           <li>✔ Unlimited generations</li>
           <li>✔ Full CRUD generation</li>
           <li>✔ Priority support</li>
         </ul>
 
-        <button (click)="goTo('SMALL')" class="mt-8 w-full bg-blue-600 text-white py-3 rounded-xl hover:bg-blue-700 transition">
+        <button
+          (click)="goTo('SMALL')"
+          class="mt-8 w-full bg-blue-600 text-white py-3 rounded-xl hover:bg-blue-700 transition"
+        >
           Get started
         </button>
-
-        <!-- 🔥 CONVERSÃO -->
-        <p class="mt-2 text-sm text-gray-500 text-center">
-          No commitment. Cancel anytime.
-        </p>
       </div>
 
       <!-- FULL -->
@@ -65,26 +65,27 @@
         <h3 class="text-xl font-bold text-gray-900">Full</h3>
         <p class="mt-2 text-gray-500">For teams and heavy usage</p>
 
-        <p class="text-4xl font-bold mt-6">$12.99<span class="text-lg text-gray-500">/mo</span></p>
+        <p class="text-4xl font-bold mt-6">$12.99</p>
 
         <ul class="mt-6 space-y-3 text-gray-600">
-          <li>✔ Up to 50 machines</li>
+          <li>✔ Up to 10 machines</li>
           <li>✔ Unlimited generations</li>
           <li>✔ Full CRUD generation</li>
           <li>✔ Premium support</li>
         </ul>
 
-        <button (click)="goTo('FULL')" class="mt-8 w-full border border-gray-300 py-3 rounded-xl hover:bg-gray-100 transition">
+        <button
+          (click)="goTo('FULL')"
+          class="mt-8 w-full border border-gray-300 py-3 rounded-xl hover:bg-gray-100 transition"
+        >
           Get started
         </button>
       </div>
-
     </div>
 
     <!-- TRUST -->
     <p class="mt-12 text-sm text-gray-500">
-      Secure payments powered by Stripe. Cancel anytime.
+      Secure payments powered by Stripe.
     </p>
-
   </div>
 </section>

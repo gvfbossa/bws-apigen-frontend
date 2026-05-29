@@ -6,9 +6,9 @@
       alt="BWS ApiGen"
       class="w-56"
     />
-    <span class="text-5xl font-bold text-blue-600 hover:text-blue-800">
-      BWS
-    </span>
+    <span class="text-5xl font-bold text-blue-600 hover:text-blue-800"
+      >BWS</span
+    >
     <span class="text-5xl font-bold text-gray-900">ApiGen</span>
   </div>
 
@@ -18,48 +18,72 @@
       <h1 class="text-3xl font-bold text-gray-900">
         Welcome back, <span class="text-blue-600">{{ user?.name }}</span>
       </h1>
+
       <p class="text-gray-500 mt-1">Manage your account and usage</p>
-    </div>
 
-    <!-- TOP SUMMARY -->
-    <div class="grid md:grid-cols-3 grid-cols-1 gap-4 mb-8">
-      <!-- PLAN -->
-      <div class="bg-white p-5 rounded-2xl shadow flex flex-col">
-        <span class="text-sm text-gray-500">Current Plan</span>
-        <span class="text-xl font-bold text-gray-900 mt-1">
-          {{ user?.plan }}
-        </span>
-      </div>
-
-      <!-- STATUS -->
-      <div class="bg-white p-5 rounded-2xl shadow flex flex-col">
-        <span class="text-sm text-gray-500">Status</span>
+      <!-- MINI STATUS BADGE -->
+      <div class="mt-3 flex justify-center">
         <span
-          class="text-xl font-bold mt-1"
+          class="px-3 py-1 rounded-full text-xs font-semibold"
           [ngClass]="{
-            'text-green-600': user?.subscriptionStatus === 'ACTIVE',
-            'text-red-600': user?.subscriptionStatus !== 'ACTIVE',
+            'bg-green-100 text-green-700': user?.licenseStatus === 'ACTIVE',
+            'bg-red-100 text-red-700': user?.licenseStatus !== 'ACTIVE',
           }"
         >
-          {{ user?.subscriptionStatus }}
-        </span>
-      </div>
-
-      <!-- NEXT BILLING -->
-      <div class="bg-white p-5 rounded-2xl shadow flex flex-col">
-        <span class="text-sm text-gray-500">Next Billing</span>
-        <span class="text-xl font-bold text-gray-900 mt-1">
-          {{ user?.subscriptionPaidUntil | date }}
+          {{ user?.licenseStatus }}
         </span>
       </div>
     </div>
 
-    <!-- GRID -->
-    <div class="block md:grid md:grid-cols-2 md:gap-6 space-y-6 md:space-y-0">
+    <!-- QUICK STATS (NOVO) -->
+    <div class="grid md:grid-cols-4 gap-4 mb-8">
+      <!-- USAGE % -->
+      <div
+        class="bg-gradient-to-r from-blue-600 to-blue-700 text-white p-5 rounded-2xl shadow"
+      >
+        <p class="text-sm opacity-80">Usage %</p>
+        <p class="text-2xl font-bold">
+          {{ (usedMachines / maxMachines) * 100 | number: "1.0-0" }}%
+        </p>
+      </div>
+
+      <!-- MACHINES TOTAL -->
+      <div class="bg-white p-5 rounded-2xl shadow">
+        <p class="text-sm text-gray-500">Generated APIs</p>
+        <p class="text-2xl font-bold text-gray-900">
+          {{ user?.machinesTotal }}
+        </p>
+      </div>
+
+      <!-- LAST ACTIVITY -->
+      <div class="bg-white p-5 rounded-2xl shadow">
+        <p class="text-sm text-gray-500">Last Activity</p>
+        <p class="text-sm font-semibold text-gray-900">
+          {{ user?.lastMachineRegistered }}
+        </p>
+      </div>
+
+      <!-- “DEV MOOD” (FAKE KPI, MAS BONITO) -->
+      <div class="bg-white p-5 rounded-2xl shadow">
+        <p class="text-sm text-gray-500">Dev Status</p>
+        <p class="text-sm font-semibold text-gray-900">
+          {{
+            user!.machinesTotal < 5
+              ? "Just starting 🚀"
+              : user!.machinesTotal < 20
+                ? "Getting traction ⚡"
+                : "Power user 🔥"
+          }}
+        </p>
+      </div>
+    </div>
+
+    <!-- GRID PRINCIPAL -->
+    <div class="grid md:grid-cols-2 gap-6">
       <!-- USAGE -->
       <div class="bg-white p-6 rounded-2xl shadow">
         <div class="flex items-center justify-between">
-          <h2 class="text-lg font-semibold text-gray-900">Usage</h2>
+          <h2 class="text-lg font-semibold text-gray-900">Total Usage</h2>
           <span class="text-sm text-gray-500">
             {{ usedMachines }} / {{ maxMachines }}
           </span>
@@ -84,20 +108,18 @@
         </p>
       </div>
 
-      <!-- ACTIVITY -->
+      <!-- LICENSE INFO -->
       <div class="bg-white p-6 rounded-2xl shadow">
-        <h2 class="text-lg font-semibold text-gray-900">Your Activity</h2>
+        <h2 class="text-lg font-semibold text-gray-900">License Information</h2>
 
-        <div class="mt-4 space-y-2 text-gray-600">
-          <p>
-            APIs generated:
-            <span class="font-semibold">{{ user?.machinesTotal }}</span>
-          </p>
-          <p>
-            Last generation:
-            <span class="font-semibold">{{ user?.lastMachineRegistered }}</span>
-          </p>
-        </div>
+        <p class="mt-3 text-sm text-gray-600">
+          Your license is linked to registered machines for commercial
+          protection.
+        </p>
+
+        <p class="mt-2 text-sm text-gray-600">
+          If you change computers, a new machine slot will be used.
+        </p>
       </div>
 
       <!-- ACCOUNT -->
@@ -106,21 +128,22 @@
 
         <div class="mt-4 space-y-2 text-gray-600">
           <p>
-            Name:
-            <span class="font-semibold">{{ user?.name }}</span>
+            Name: <span class="font-semibold">{{ user?.name }}</span>
           </p>
           <p>
-            Email:
-            <span class="font-semibold">{{ user?.email }}</span>
+            Email: <span class="font-semibold">{{ user?.email }}</span>
+          </p>
+          <p>
+            Plan:
+            <span class="font-semibold">{{ user?.plan }}</span>
           </p>
         </div>
       </div>
 
-      <!-- ACTIONS CARD -->
-      <div class="bg-white p-6 rounded-2xl shadow transition-all duration-300">
+      <!-- ACTIONS -->
+      <div class="bg-white p-6 rounded-2xl shadow">
         <h2 class="text-lg font-semibold text-gray-900">Actions</h2>
 
-        <!-- BOTÕES INICIAIS -->
         <div *ngIf="!editingPassword" class="mt-4 flex flex-col gap-3">
           <button
             (click)="editingPassword = true"
@@ -128,319 +151,106 @@
           >
             Change password
           </button>
-
-          <button
-            class="py-2 rounded-xl text-red-600 hover:bg-red-50 transition"
-            (click)="cancelSubscription()"
-          >
-            Cancel subscription
-          </button>
-          <span *ngIf="cancelSubscriptionSuccess" class="text-gray-600 text-sm">
-            Your subscription is canceled and you will have access until the end
-            of your Subscription period.
-          </span>
         </div>
 
-        <!-- FORM TROCAR SENHA -->
+        <!-- FORM -->
         <form
           *ngIf="editingPassword"
           (ngSubmit)="onChangePassword()"
           class="mt-4 space-y-4"
         >
-          <!-- CURRENT PASSWORD -->
-          <div class="relative w-full">
-            <label class="text-sm text-gray-600">Current Password</label>
-            <input
-              [type]="showCurrent ? 'text' : 'password'"
-              [(ngModel)]="currentPassword"
-              name="currentPassword"
-              required
-              class="w-full mt-1 px-4 py-2 border rounded-xl focus:ring-2 focus:ring-blue-500 outline-none"
-            />
-            <button
-              type="button"
-              (click)="showCurrent = !showCurrent"
-              class="absolute inset-y-0 right-3 flex items-center p-1 focus:outline-none"
-            >
-              <svg
-                *ngIf="!showCurrent"
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-5 w-5 text-blue-600"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                />
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
-                />
-              </svg>
+          <!-- CURRENT -->
+          <input
+            [type]="showCurrent ? 'text' : 'password'"
+            [(ngModel)]="currentPassword"
+            name="currentPassword"
+            placeholder="Current password"
+            class="w-full mt-1 px-4 py-2 border rounded-xl"
+          />
 
-              <svg
-                *ngIf="showCurrent"
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-5 w-5 text-blue-600"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M3 3l18 18"
-                />
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M13.875 18.825A10.05 10.05 0 0112 19c-4.477 0-8.268-2.943-9.542-7a9.964 9.964 0 012.334-3.643M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                />
-              </svg>
-            </button>
-          </div>
+          <!-- NEW -->
+          <input
+            [type]="showNew ? 'text' : 'password'"
+            [(ngModel)]="newPassword"
+            name="newPassword"
+            placeholder="New password"
+            class="w-full px-4 py-2 border rounded-xl"
+          />
 
-          <!-- NEW PASSWORD -->
-          <div class="relative w-full">
-            <label class="text-sm text-gray-600">New Password</label>
-            <input
-              [type]="showNew ? 'text' : 'password'"
-              [(ngModel)]="newPassword"
-              name="newPassword"
-              required
-              class="w-full mt-1 px-4 py-2 border rounded-xl focus:ring-2 focus:ring-blue-500 outline-none"
-            />
-            <button
-              type="button"
-              (click)="showNew = !showNew"
-              class="absolute inset-y-0 right-3 flex items-center p-1 focus:outline-none"
-            >
-              <svg
-                *ngIf="!showNew"
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-5 w-5 text-blue-600"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                />
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
-                />
-              </svg>
-              <svg
-                *ngIf="showNew"
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-5 w-5 text-blue-600"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M3 3l18 18"
-                />
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M13.875 18.825A10.05 10.05 0 0112 19c-4.477 0-8.268-2.943-9.542-7a9.964 9.964 0 012.334-3.643M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                />
-              </svg>
-            </button>
-          </div>
+          <!-- CONFIRM -->
+          <input
+            [type]="showConfirm ? 'text' : 'password'"
+            [(ngModel)]="confirmPassword"
+            name="confirmPassword"
+            placeholder="Confirm password"
+            class="w-full px-4 py-2 border rounded-xl"
+          />
 
-          <!-- CONFIRM PASSWORD -->
-          <div class="relative w-full">
-            <label class="text-sm text-gray-600">Confirm Password</label>
-            <input
-              [type]="showConfirm ? 'text' : 'password'"
-              [(ngModel)]="confirmPassword"
-              name="confirmPassword"
-              required
-              class="w-full mt-1 px-4 py-2 border rounded-xl focus:ring-2 focus:ring-blue-500 outline-none"
-            />
-            <button
-              type="button"
-              (click)="showConfirm = !showConfirm"
-              class="absolute inset-y-0 right-3 flex items-center p-1 focus:outline-none"
-            >
-              <svg
-                *ngIf="!showConfirm"
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-5 w-5 text-blue-600"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                />
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
-                />
-              </svg>
-              <svg
-                *ngIf="showConfirm"
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-5 w-5 text-blue-600"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M3 3l18 18"
-                />
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M13.875 18.825A10.05 10.05 0 0112 19c-4.477 0-8.268-2.943-9.542-7a9.964 9.964 0 012.334-3.643M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                />
-              </svg>
-            </button>
-          </div>
-
-          <!-- MENSAGENS -->
-          <div
-            *ngIf="passwordError && !confirmPasswordError"
-            class="text-red-600 text-sm"
-          >
-            Passwords are invalid or empty.
-          </div>
-          <div *ngIf="passwordFormatError" class="text-red-600 text-sm">
-            Passwords must have 8 digits, a special character, and at least 1
-            capital letter.
-          </div>
-          <div *ngIf="confirmPasswordError" class="text-red-600 text-sm">
-            New password and confirmation do not match.
-          </div>
-          <div *ngIf="passwordSuccess" class="text-green-600 text-sm">
-            Password updated successfully!
-          </div>
-
-          <!-- AÇÕES -->
-          <div class="flex gap-3 mt-2">
-            <button
-              type="submit"
-              class="bg-blue-600 text-white px-4 py-2 rounded-xl hover:bg-blue-700 transition flex items-center justify-center gap-2"
-              [disabled]="updatingPassword"
-            >
-              <span *ngIf="!updatingPassword">Update</span>
-              <span *ngIf="updatingPassword" class="flex items-center gap-2">
-                <svg
-                  class="animate-spin h-5 w-5 text-white"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                >
-                  <circle
-                    class="opacity-25"
-                    cx="12"
-                    cy="12"
-                    r="10"
-                    stroke="currentColor"
-                    stroke-width="4"
-                  ></circle>
-                  <path
-                    class="opacity-75"
-                    fill="currentColor"
-                    d="M4 12a8 8 0 018-8v8H4z"
-                  ></path>
-                </svg>
-                Updating...
-              </span>
+          <div class="flex gap-3">
+            <button class="bg-blue-600 text-white px-4 py-2 rounded-xl">
+              Update
             </button>
 
             <button
               type="button"
               (click)="cancelEdit()"
-              class="border px-4 py-2 rounded-xl hover:bg-gray-100 transition"
+              class="border px-4 py-2 rounded-xl"
             >
               Cancel
             </button>
           </div>
         </form>
       </div>
-
       <!-- SUPPORT -->
-      <div class="bg-white p-6 rounded-2xl shadow mt-6">
+      <div class="mt-6 bg-white p-6 rounded-2xl shadow">
         <h2 class="text-lg font-semibold text-gray-900">Support</h2>
 
         <p class="mt-2 text-sm text-gray-600">
-          Having trouble? Reach out to our support team and we'll help you ASAP.
+          Having trouble? Reach out to support.
         </p>
 
         <div class="mt-4 flex flex-col gap-3">
           <a
             href="mailto:support@bossawebsolutions.com.br"
             class="border py-2 rounded-xl text-center hover:bg-gray-100 transition"
-            >Email Support</a
           >
+            Email Support
+          </a>
+
           <a
             *ngIf="isPlanEligiblePremiumContact"
-            href="https://api.whatsapp.com/send?phone=+5511953468808&text=Hi,+I+need+support+for+APIGen"
+            href="https://api.whatsapp.com/send?phone=+5511953468808&text=Hi,+I+need+support"
             target="_blank"
             class="border py-2 rounded-xl text-center hover:bg-gray-100 transition"
-            >WhatsApp Contact</a
           >
+            WhatsApp Contact
+          </a>
         </div>
       </div>
 
-      <!-- Logoff -->
-      <div class="bg-white p-6 rounded-2xl shadow mt-6">
+      <!-- LOGOFF -->
+      <div class="mt-6 bg-white p-6 rounded-2xl shadow">
         <h2 class="text-lg font-semibold text-gray-900">Logoff</h2>
         <p class="mt-2 text-sm text-gray-600">Log out of your account</p>
-        <div class="mt-4 flex flex-col gap-3">
-          <button
-            (click)="logout()"
-            class="border py-2 rounded-xl text-center hover:bg-gray-100 transition"
-          >
-            Log Out
-          </button>
-        </div>
+        <button
+          (click)="logout()"
+          class="mt-4 border py-2 rounded-xl w-full hover:bg-gray-100"
+        >
+          Log Out
+        </button>
       </div>
     </div>
   </div>
 
   <!-- LEGAL -->
   <div class="mt-10 text-center text-xs text-gray-500 space-x-3">
-    <button type="button" (click)="openLegal('terms')" class="hover:underline">
-      Terms of Service
+    <button (click)="openLegal('terms')" class="hover:underline">Terms</button>
+    <span>•</span>
+    <button (click)="openLegal('privacy')" class="hover:underline">
+      Privacy
     </button>
     <span>•</span>
-    <button
-      type="button"
-      (click)="openLegal('privacy')"
-      class="hover:underline"
-    >
-      Privacy Policy
-    </button>
-    <span>•</span>
-    <button type="button" (click)="openLegal('lgpd')" class="hover:underline">
-      Data Protection (LGPD)
-    </button>
+    <button (click)="openLegal('lgpd')" class="hover:underline">LGPD</button>
   </div>
 </section>
 
@@ -449,13 +259,5 @@
   [isOpen]="showLegalModal"
   [type]="legalType"
   (close)="closeLegal()"
-></app-terms-modal>
-
-<!-- CONFIRM DIALOG -->
-<app-confirm-dialog
-  [isOpen]="showCancelDialog"
-  [title]="'Cancel Subscription'"
-  [message]="cancelMessage"
-  (confirm)="onConfirmCancel()"
-  (cancel)="onCancelDialog()"
-></app-confirm-dialog>
+>
+</app-terms-modal>

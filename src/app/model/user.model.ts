@@ -8,6 +8,5 @@ export interface User {
   token: string;
   usedMachines?: number
   card?: Card
-  subscriptionPaidUntil?: Date
-  subscriptionStatus: string
+  licenceStatus: string
 }

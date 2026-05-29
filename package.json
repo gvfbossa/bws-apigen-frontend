@@ -6,7 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "deploy": "rm -rf dist/ && ng build --configuration production && cp src/sitemap.xml dist/bws-apigen/ && cp src/robots.txt dist/bws-apigen/ && firebase deploy"
   },
   "private": true,
   "dependencies": {

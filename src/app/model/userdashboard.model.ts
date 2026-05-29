@@ -3,8 +3,7 @@ export interface UserDashboard {
   name: string;
   email: string;
   plan: 'SOLO' | 'SMALL' | 'FULL';
-  subscriptionStatus: 'ACTIVE' | 'CANCELED';
-  subscriptionPaidUntil: string; // ISO date string
+  licenseStatus: 'ACTIVE' | 'CANCELED';
   usedMachines: number;
   maxMachines: number;
   machinesTotal: number;
