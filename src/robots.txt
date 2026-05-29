@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://sitefacilja.bossawebsolutions.com.br/sitemap.xml
+Sitemap: https://bwsapigen.bossawebsolutions.com.br/sitemap.xml
