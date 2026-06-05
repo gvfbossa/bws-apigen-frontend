@@ -6,7 +6,7 @@
       Create your account
     </h2>
     <p class="text-sm text-gray-500 text-center mt-2">
-      Start generating APIs in minutes
+      Start generating APIs in seconds
     </p>
 
     <form (ngSubmit)="submit($event)" class="mt-6 space-y-5">
@@ -198,7 +198,7 @@
                   : planDefaultPriceDefaultClass
               "
             >
-              $3.99 / month
+              $3.99
             </p>
           </button>
           <button
@@ -207,7 +207,7 @@
             [class]="plan === 'SMALL' ? activeClass : defaultClass"
           >
             <p class="font-semibold">Small</p>
-            <p class="text-xs text-gray-900">15 machines</p>
+            <p class="text-xs text-gray-900">5 machines</p>
             <p
               [class]="
                 plan === 'SMALL'
@@ -215,7 +215,7 @@
                   : planDefaultPriceDefaultClass
               "
             >
-              $6.99 / month
+              $6.99
             </p>
           </button>
           <button
@@ -224,7 +224,7 @@
             [class]="plan === 'FULL' ? activeClass : defaultClass"
           >
             <p class="font-semibold">Full</p>
-            <p class="text-xs text-gray-900">50 machines</p>
+            <p class="text-xs text-gray-900">10 machines</p>
             <p
               [class]="
                 plan === 'FULL'
@@ -232,7 +232,7 @@
                   : planDefaultPriceDefaultClass
               "
             >
-              $12.99 / month
+              $12.99
             </p>
           </button>
         </div>
